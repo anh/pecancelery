@@ -30,6 +30,7 @@ class PecanLoader(BaseLoader):
     
     def _parse_config(self):
         from pecan import conf
+        
         c = getattr(conf, 'celery', {})
         
         # If CELERY_IMPORTS isn't specified, try to autodiscover celery tasks
@@ -38,10 +39,7 @@ class PecanLoader(BaseLoader):
             
         c['CELERY_ROUTES'] = ('pecancelery.loader.PecanTaskRouter',)
         
-        if not len(c['CELERY_IMPORTS']):
-            warnings.warn("Could not auto-discover tasks in your Pecan project.  Please manually specify CELERY_IMPORTS in your Pecan configuration file.")
-        
-        return ConfigStruct(**c)
+        return c
 
     def read_configuration(self):
         self.configured = True

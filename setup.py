@@ -7,7 +7,7 @@ import pecancelery as distmeta
 #
 requirements = [
   "pecan",
-  "celery"
+  "celery >= 2.2"
 ]
 
 setup(
