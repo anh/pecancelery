@@ -22,7 +22,7 @@ setup(
     description             = "Celery integration for pecan",
     long_description        = open('README.rst').read(),
     classifiers             = [
-        'Development Status :: 4 - Beta',
+        'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Topic :: System :: Distributed Computing',

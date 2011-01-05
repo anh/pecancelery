@@ -1,4 +1,4 @@
-from app import PecanTaskFactory
+from app import PecanTaskFactory, task
 
 VERSION = (0, 0, 1)
 
