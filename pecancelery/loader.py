@@ -34,8 +34,6 @@ class PecanLoader(BaseLoader):
         if c is None:
             return {}
         
-        import pdb; pdb.set_trace()
-        
         # If CELERY_IMPORTS isn't specified, try to autodiscover celery tasks
         if c.get('CELERY_IMPORTS') is None:
             modules = getattr(conf.app, 'modules', [])

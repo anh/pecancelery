@@ -1,5 +1,5 @@
 from app import PecanTaskFactory, task, conf
 
-__all__ = ['PecanTask', 'task', 'conf']
+__all__ = ['Task', 'task', 'conf']
 
-PecanTask = PecanTaskFactory.instance
+Task = PecanTaskFactory.instance

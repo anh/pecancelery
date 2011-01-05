@@ -42,17 +42,17 @@ to the top of your configuration file(s) (e.g., ``config.py``)::
     import pecancelery
     
 In your pecan project root (where your controllers and template folder live), you should define a ``tasks`` module
-that contains implementations of ``pecancelery.PecanTask``:
+that contains implementations of ``pecancelery.Task` and/or functions decorated with pecancelery.task`:
 
 ::
 
-  from pecancelery import PecanTask, task
+  from pecancelery import Task, task
   
   @task()
   def add(x, y): 
       return x + y
   
-  class AddTask(PecanTask):
+  class AddTask(Task):
     def run(self, x, y, **kw):
       return x + y
 
