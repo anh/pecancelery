@@ -34,11 +34,14 @@ class PecanLoader(BaseLoader):
         if c is None:
             return {}
         
+        import pdb; pdb.set_trace()
+        
         # If CELERY_IMPORTS isn't specified, try to autodiscover celery tasks
         if c.get('CELERY_IMPORTS') is None:
-            imports = tuple([filter(None, autodiscover(module)) for module in conf.app.modules])
-            if imports:
-                c['CELERY_IMPORTS'] = imports
+            modules = getattr(conf.app, 'modules', [])
+            imports = [filter(None, autodiscover(module)) for module in modules]
+            if len(imports):
+                c['CELERY_IMPORTS'] = tuple(imports)
             
         c['CELERY_ROUTES'] = ('pecancelery.loader.PecanTaskRouter',)
         

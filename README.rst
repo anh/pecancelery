@@ -37,7 +37,7 @@ Using pecancelery
 ===================
 
 To enable ``pecancelery`` for your project you need to add the following line
-to the top of your configuration file(s)::
+to the top of your configuration file(s) (e.g., ``config.py``)::
 
     import pecancelery
     

@@ -22,25 +22,37 @@ class TestConf(unittest.TestCase):
         conf = configuration.initconf()
         conf.update_with_module('empty')
 
-        from pecancelery import PecanTask, conf
+        from pecancelery import conf
         app = celery.Celery()
         for k, v in app.loader.conf.items():
             self.assertEqual(dict(conf)[k], v)
             
     def test_single_config(self):
         """
-        Ensure that if the configuration file includes no celery
-        config, the parsed config object is identical to
-        celery's default config object
+        Ensure that if the configuration file includes celery-specific
+        config, the parsed config object includes it
         """
         conf = configuration.initconf()
         conf.update_with_module('empty')
 
-        from pecancelery import PecanTask, conf
+        from pecancelery import conf
         app = celery.Celery()
         for k, v in app.loader.conf.items():
             if k == 'BROKER_HOST':
-                self.assertEqual(v, 'example.com')
+                self.assertEqual(dict(conf)[k], 'example.com')
             else:
                 self.assertEqual(dict(conf)[k], v)        
         
+    def test_celery_imports_module(self):
+        """
+        Ensure that if CELERY_IMPORTS is specified manually in pecan config,
+        it's actually used
+        """     
+        conf = configuration.initconf()
+        conf.update_with_module('standard')
+
+        from pecancelery import conf
+        app = celery.Celery()
+        for k, v in app.loader.conf.items():
+            if k == 'CELERY_IMPORTS':
+                self.assertEqual(dict(conf)[k], ('package.module.tasks',))
