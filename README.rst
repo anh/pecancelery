@@ -36,7 +36,7 @@ databases (`SQLAlchemy`_ / `Django`_) is also available.
 Using pecancelery
 ===================
 
-To enable ``pecancelery`` for your project you need to add the following lines
+To enable ``pecancelery`` for your project you need to add the following line
 to the top of your configuration file(s)::
 
     import pecancelery

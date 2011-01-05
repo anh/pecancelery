@@ -1,6 +1,6 @@
 from celery import app
 
-__all__ = ['PecanTaskFactory', 'task']
+__all__ = ['PecanTaskFactory', 'task', 'conf']
 
 class PecanCeleryApp(app.App):
     
@@ -34,5 +34,8 @@ class BaseClassFactory(object):
         return self.__task__
         
 base_app = BaseAppFactory().instance
+
+# Exposed
 PecanTaskFactory = BaseClassFactory()
 task = base_app.task
+conf = base_app.conf

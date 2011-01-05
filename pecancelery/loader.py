@@ -1,5 +1,4 @@
 from celery.loaders.base        import BaseLoader
-import warnings
 
 import imp
 
@@ -31,11 +30,15 @@ class PecanLoader(BaseLoader):
     def _parse_config(self):
         from pecan import conf
         
-        c = getattr(conf, 'celery', {})
+        c = getattr(conf, 'celery', None)
+        if c is None:
+            return {}
         
         # If CELERY_IMPORTS isn't specified, try to autodiscover celery tasks
         if c.get('CELERY_IMPORTS') is None:
-            c['CELERY_IMPORTS'] = tuple([filter(None, autodiscover(module)) for module in conf.app.modules])
+            imports = tuple([filter(None, autodiscover(module)) for module in conf.app.modules])
+            if imports:
+                c['CELERY_IMPORTS'] = imports
             
         c['CELERY_ROUTES'] = ('pecancelery.loader.PecanTaskRouter',)
         

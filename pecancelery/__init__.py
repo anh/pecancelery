@@ -1,9 +1,5 @@
-from app import PecanTaskFactory, task
+from app import PecanTaskFactory, task, conf
 
-VERSION = (0, 0, 1)
-
-__version__ = ".".join(map(str, VERSION[0:3]))
-__author__ = "Ryan Petrello"
-__author_email__ = "ryan [at] ryanpetrello [dot] com"
+__all__ = ['PecanTask', 'task', 'conf']
 
 PecanTask = PecanTaskFactory.instance

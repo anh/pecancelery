@@ -1,24 +1,22 @@
 from setuptools import setup
 
-import pecancelery as distmeta
-
 #
 # determine requirements
 #
 requirements = [
   "pecan",
-  "celery >= 2.2"
+  "celery == 2.2.0b1"
 ]
 
 setup(
     name                    = "pecancelery",
-    version                 = distmeta.__version__,
+    version                 = "0.0.0",
     packages                = ['pecancelery'],
     include_package_data    = True,
                             
     # metadata              
-    author                  = distmeta.__author__,
-    author_email            = distmeta.__author_email__,
+    author                  = "Ryan Petrello",
+    author_email            = "ryan [at] ryanpetrello [dot] com",
     description             = "Celery integration for pecan",
     long_description        = open('README.rst').read(),
     classifiers             = [
@@ -35,6 +33,6 @@ setup(
     keywords                = "pecan, celery, framework, task queue, asynchronous, rabbitmq, amqp, queue, distributed",
     url                     = "https://github.com/ryanpetrello/pecancelery",
                             
-    scripts                 = ['bin/celery'],
+    scripts                 = ['bin/celeryd'],
     install_requires        = requirements
 )
