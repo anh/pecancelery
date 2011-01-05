@@ -1,4 +1,5 @@
 from celery import app
+from pecancelery.loader import LOADER_ALIAS
 
 __all__ = ['PecanTaskFactory', 'task', 'conf']
 
@@ -20,7 +21,7 @@ class BaseAppFactory(object):
     @property
     def instance(self):
         if self.__app__ is None:
-            self.__app__ = PecanCeleryApp(loader='pecancelery.loader.PecanLoader')
+            self.__app__ = PecanCeleryApp(loader=LOADER_ALIAS)
         return self.__app__
 
 class BaseClassFactory(object):

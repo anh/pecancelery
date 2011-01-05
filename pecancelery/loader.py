@@ -2,7 +2,9 @@ from celery.loaders.base        import BaseLoader
 
 import imp
 
-__all__ = ['PecanLoader']
+__all__ = ['PecanLoader', 'LOADER_ALIAS']
+
+LOADER_ALIAS = 'pecancelery.loader.PecanLoader'
     
 def autodiscover(module):
     name = 'tasks'
