@@ -4,7 +4,7 @@ from celery         import loaders
 import unittest
 
 
-class TestPecanLoader(unittest.TestCase):
+class TestLoader(unittest.TestCase):
     
     def setUp(self):
         self.loader = loader.PecanLoader()

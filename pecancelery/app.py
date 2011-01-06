@@ -1,7 +1,7 @@
 from celery import app
 from pecancelery.loader import LOADER_ALIAS
 
-__all__ = ['PecanTaskFactory', 'task', 'conf']
+__all__ = ['PecanTaskFactory', 'task', 'conf', 'base_app']
 
 class PecanCeleryApp(app.App):
     

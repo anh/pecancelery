@@ -35,6 +35,7 @@ class PecanLoader(BaseLoader):
         c = getattr(conf, 'celery', None)
         if c is None:
             return {}
+        c = dict(c)
         
         # If CELERY_IMPORTS isn't specified, try to autodiscover celery tasks
         if c.get('CELERY_IMPORTS') is None:
