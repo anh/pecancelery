@@ -31,8 +31,6 @@ databases (via `SQLAlchemy`) is also available.
 
 .. contents::
     :local:
-    
-.. enabling-pecancelery:
 
 Enabling pecancelery
 ------------------------------
@@ -53,8 +51,6 @@ Also, in your project's setup.py, you should add ``pecancelery`` into ``paster_p
     paster_plugins = ['pecan', 'pecancelery'],
     ...
   )
-  
-.. configuring-pecancelery:
   
 Configuring pecancelery
 ------------------------------
@@ -82,8 +78,6 @@ Your pecan configuration file(s) may include a ``celery`` block:
   }
 
 Configuration options are documented at http://celeryq.org/docs/configuration.html.
-  
-.. defining-and-queuing-tasks-with-pecancelery:
   
 Defining and queueing tasks with pecancelery
 ------------------------------
@@ -120,8 +114,6 @@ To start a celeryd worker, just use the `pecan` command:
 ::
 
   user$ pecan celeryd config.py
-
-.. using-the-development-version:
 
 Using the development version
 ------------------------------
