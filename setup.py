@@ -33,6 +33,9 @@ setup(
     keywords                = "pecan, celery, framework, task queue, asynchronous, rabbitmq, amqp, queue, distributed",
     url                     = "https://github.com/ryanpetrello/pecancelery",
                             
-    scripts                 = ['bin/celeryd'],
-    install_requires        = requirements
+    install_requires        = requirements,
+    entry_points            = """
+    [paste.paster_command]
+    pecan-celeryd = pecancelery.bin.celeryd:CeleryCommand
+    """
 )
