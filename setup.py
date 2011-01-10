@@ -5,7 +5,7 @@ from setuptools import setup
 #
 requirements = [
   "pecan",
-  "celery == 2.2.0b1"
+  "celery == 2.2.0rc1"
 ]
 
 setup(
