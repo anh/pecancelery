@@ -19,13 +19,12 @@ Celery is written in Python, but the protocol can be implemented in any
 language. It can also `operate with other languages using webhooks`_.
 
 The recommended message broker is `RabbitMQ`_, but support for `Redis`_ and
-databases (`SQLAlchemy`_ / `Django`_) is also available.
+databases (via `SQLAlchemy`) is also available.
 
 .. _`Celery`: http://celeryproject.org/
 .. _`Pecan`: http://www.pecanpy.org/
 .. _`RabbitMQ`: http://www.rabbitmq.com/
 .. _`Redis`: http://code.google.com/p/redis/
-.. _`Django`: http://www.djangoproject.org/
 .. _`SQLAlchemy`: http://www.sqlalchemy.org/
 .. _`operate with other languages using webhooks`:
     http://ask.github.com/celery/userguide/remote-tasks.html
