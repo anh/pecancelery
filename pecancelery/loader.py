@@ -19,11 +19,6 @@ def autodiscover(module):
         return
 
     return "%s.%s" % (module.__name__, name)
-
-
-class ConfigStruct(object):
-    def __init__(self, **kwargs): 
-        self.__dict__.update(kwargs)
         
 
 class PecanLoader(BaseLoader):
