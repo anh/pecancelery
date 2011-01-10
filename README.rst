@@ -41,7 +41,7 @@ to the top of your configuration file(s) (e.g., ``config.py``)::
 
     import pecancelery
     
-In your setup.py, you should add ``pecancelery`` into ``paster_plugins``.
+Also, in your project's setup.py, you should add ``pecancelery`` into ``paster_plugins``.
 
 ::
 
@@ -78,9 +78,9 @@ Your pecan configuration file(s) may include a ``celery`` block:
     'CELERYD_LOG_LEVEL'                     : 'DEBUG'
   }
 
-All official configuration options documented at http://celeryq.org/docs/configuration.html are supported.
+Configuration options are documented at http://celeryq.org/docs/configuration.html.
   
-Queueing tasks with pecancelery
+Defining and queueing tasks with pecancelery
 ------------------------------
     
 In your pecan project root (where your controllers and template folder live), you should define a ``tasks`` module
@@ -102,15 +102,15 @@ From any pecan app controller, you can queue tasks just like you do with celery:
 
 ::
 
-  from superblog.tasks import SomeTask
+  from superblog.tasks import AddTask
 
   class SampleController(object):
 
     @expose()
     def index(self):
-      SomeTask.delay('arg1', 'arg2')
+      AddTask.delay(2, 2)
       
-To start a celeryd worker to read from your queue, just use the `pecan` command:
+To start a celeryd worker, just use the `pecan` command:
 
 ::
 
