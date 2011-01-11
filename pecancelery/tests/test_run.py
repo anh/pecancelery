@@ -1,5 +1,5 @@
 from pecan                      import configuration
-from configs.sampleproj.tasks   import AddTask, subtract
+from configs.sampleproj.tasks   import AddTask, concat
 
 import os
 import unittest
@@ -14,5 +14,5 @@ class TestRun(unittest.TestCase):
         result = AddTask.delay(1, 2)
         self.assertEqual(result.result, 3)
         
-        result = subtract(6, 2)
-        self.assertEqual(result, 4)
+        result = concat('Hello, ', 'there!')
+        self.assertEqual(result, 'Hello, there!')

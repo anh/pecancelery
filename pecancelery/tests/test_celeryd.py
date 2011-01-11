@@ -41,4 +41,4 @@ class TestCeleryWorker(unittest.TestCase):
         c = CeleryCommand('celeryd')
         c.config = conf
 
-        self.assertEqual(c.determine_queues(), 'default,math')
+        self.assertEqual(c.determine_queues(), 'default,strings,math')

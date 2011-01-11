@@ -6,8 +6,27 @@ __all__ = ['PecanTaskFactory', 'task', 'conf', 'base_app']
 class PecanCeleryApp(app.App):
     
     def task(self, *args, **options):
-        options['base'] = PecanTaskFactory.instance
-        return super(PecanCeleryApp, self).task(*args, **options)
+        # Retrieve the base intance
+        base = PecanTaskFactory.instance
+        options['base'] = base
+        
+        # Pass on to the native task decorator
+        f = super(PecanCeleryApp, self).task(*args, **options)
+        
+        #
+        # Add the decorated function into our list of "autodiscovered"
+        # subtasks
+        #
+        base.__subtasks__.append(f)
+        
+        #
+        # If the `queue` keyword argument is specified,
+        # attach it to the wrapped function
+        #
+        if options.get('queue'):
+            setattr(f, 'queue', options['queue'])
+        
+        return f
     
     @property
     def conf(self):
@@ -36,12 +55,12 @@ class BaseClassFactory(object):
             
             class PecanTask(base):
                 
-                __subclasses__ = []
+                __subtasks__ = []
                 
                 class __metaclass__(TaskType):
                     def __init__(cls, name, bases, ns):
                         if name != 'PecanTask':
-                            cls.__subclasses__.append(cls)
+                            cls.__subtasks__.append(cls)
                         TaskType.__init__(cls, name, bases, ns)
         
             self.__task__ = PecanTask

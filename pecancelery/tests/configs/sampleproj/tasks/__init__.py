@@ -7,6 +7,6 @@ class AddTask(Task):
     def run(self, x, y, **kw):
         return x + y
         
-@task()
-def subtract(x, y):
-    return x - y
+@task(queue='strings')
+def concat(pre, post):
+    return '%s%s' % (pre, post)

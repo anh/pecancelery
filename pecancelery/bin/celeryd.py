@@ -53,11 +53,11 @@ class CeleryCommand(Command):
 
     def determine_queues(self):
         #
-        # Look at all imported subclasses of pecancelery.Task
+        # Look at all imported subtasks of pecancelery.Task
         # and compile a list of queues.
         #
         _all_queues = set(['default'])
-        for sc in pecancelery.Task.__subclasses__:
+        for sc in pecancelery.Task.__subtasks__:
             queue = getattr(sc, 'queue', None)
             if queue:
                 _all_queues.add(queue)
