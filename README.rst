@@ -115,10 +115,10 @@ To start a celeryd worker, just use the `pecan` command:
 
   user$ pecan celeryd config.py
   
-Defining tasks and routing to queues
+Routing tasks to queues
 ------------------------------
 
-When defining tasks, you can specify a queue they belong to:
+When defining tasks, you can specify a queue they should be routed to:
 
 ::
 
@@ -133,8 +133,8 @@ When defining tasks, you can specify a queue they belong to:
   def concat(pre, post):
       return '%s%s' % (pre, post)
       
-By default, pecancelery will auto-discover your defined queues and bind workers to them.
-If you'd like to override this behavior, just specify CELERYD_QUEUES in your pecan config file(s):
+By default, pecancelery will auto-discover your defined queues and bind workers to all of them.
+If you'd like to override this behavior, just specify ``CELERYD_QUEUES`` in your pecan config file(s):
 
 ::
 
