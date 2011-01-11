@@ -1,5 +1,5 @@
-from pecan.commands     import Command
-from datetime           import datetime
+from pecan.commands.base    import Command
+from datetime               import datetime
 
 import pecancelery
 import os
