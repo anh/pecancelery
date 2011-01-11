@@ -1,5 +1,5 @@
-from celery import app
-from pecancelery.loader import LOADER_ALIAS
+from celery                 import app
+from pecancelery.loader     import LOADER_ALIAS
 
 __all__ = ['PecanTaskFactory', 'task', 'conf', 'base_app']
 
@@ -31,7 +31,21 @@ class BaseClassFactory(object):
     @property
     def instance(self):
         if self.__task__ is None:
-            self.__task__ = base_app.create_task_cls()
+            base = base_app.create_task_cls()
+            from celery.task.base import TaskType
+            
+            class PecanTask(base):
+                
+                __subclasses__ = []
+                
+                class __metaclass__(TaskType):
+                    def __init__(cls, name, bases, ns):
+                        if name != 'PecanTask':
+                            cls.__subclasses__.append(cls)
+                        TaskType.__init__(cls, name, bases, ns)
+        
+            self.__task__ = PecanTask
+            
         return self.__task__
         
 base_app = BaseAppFactory().instance

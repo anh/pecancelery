@@ -39,7 +39,11 @@ class PecanLoader(BaseLoader):
             if len(imports):
                 c['CELERY_IMPORTS'] = tuple(imports)
             
-        c['CELERY_ROUTES'] = ('pecancelery.loader.PecanTaskRouter',)
+        #
+        # Point to our custom router that looks for a `queue` attribute
+        # on tasks to determine which queue/exchange they belong in
+        #
+        c['CELERY_ROUTES'] = ('pecancelery.loader.PecanTaskRouter',)        
         
         return c
 

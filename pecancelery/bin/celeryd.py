@@ -18,13 +18,15 @@ class CeleryCommand(Command):
     min_args = 1
     max_args = 1
     
-    def command(self):        
-        # load the application
-        config = self.load_configuration(self.args[0])
-
+    def parse_config(self):
+        self.config = self.load_configuration(self.args[0])
+    
+    def command(self): 
+        self.parse_config()
+               
         # get daemonize configuration
         # note that it should be under "conf.celery.__daemonize__"
-        self.daemonize = config.celery.get('__daemonize__', False) is True
+        self.daemonize = self.config.celery.get('__daemonize__', False) is True
         
         # daemonize and detach from terminal by forking twice
         if self.daemonize:
@@ -46,13 +48,32 @@ class CeleryCommand(Command):
 
         self.log_break()
         self.log('Starting celeryd...')
+        
+        pecancelery.app.base_app.Worker(queues = self.determine_queues()).run()
 
-        _all_queues = ['default']
-        # for sc in ShootQTask.subclasses:
-        #     queue = getattr(sc, 'queue', None)
-        #     if queue:
-        #         _all_queues.append(queue)
-        pecancelery.app.base_app.Worker().run()
+    def determine_queues(self):
+        #
+        # Look at all imported subclasses of pecancelery.Task
+        # and compile a list of queues.
+        #
+        _all_queues = set(['default'])
+        for sc in pecancelery.Task.__subclasses__:
+            queue = getattr(sc, 'queue', None)
+            if queue:
+                _all_queues.add(queue)
+        _all_queues = list(_all_queues)
+        
+        #
+        # Determine the list of queues to process.  Default to
+        # pecan.conf.celery['CELERYD_QUEUES'], and fall back to
+        # the list of queues compiled above.
+        #
+        conf = getattr(self.config, 'celery', None)
+        
+        if conf and (getattr(conf, 'CELERYD_QUEUES', None) or conf.get('CELERYD_QUEUES')):
+            return getattr(conf, 'CELERYD_QUEUES', conf['CELERYD_QUEUES'])
+            
+        return ','.join(_all_queues)
 
     def log_break(self):
         self.log('-' * 60)
