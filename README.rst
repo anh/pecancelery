@@ -74,7 +74,8 @@ Your pecan configuration file(s) may include a ``celery`` block:
     'BROKER_VHOST'                          : 'vhost',
     'CELERY_RESULT_BACKEND'                 : 'database',
     'CELERY_RESULT_DBURI'                   : 'mysql://root:password@localhost/dbname?charset=utf8&use_unicode=0',
-    'CELERYD_LOG_LEVEL'                     : 'DEBUG'
+    'CELERYD_LOG_LEVEL'                     : 'DEBUG',
+    '__force_dict__'                        : True
   }
 
 Configuration options are documented at http://celeryq.org/docs/configuration.html.
@@ -144,6 +145,7 @@ If you'd like to override this behavior, just specify ``CELERYD_QUEUES`` in your
     'BROKER_PORT'                           : 5672,
     ...
     'CELERYD_QUEUES'                        : 'math,other',
+    '__force_dict__'                        : True    
   }
 
 Using the development version
