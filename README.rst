@@ -114,6 +114,35 @@ To start a celeryd worker, just use the `pecan` command:
 ::
 
   user$ pecan celeryd config.py
+  
+Defining tasks and routing to queues
+------------------------------
+
+When defining tasks, you can specify a queue they belong to:
+
+::
+
+  class AddTask(Task):
+    
+      queue = 'math'
+    
+      def run(self, x, y, **kw):
+          return x + y
+        
+  @task(queue='strings')
+  def concat(pre, post):
+      return '%s%s' % (pre, post)
+      
+By default, pecancelery will auto-discover your defined queues and bind workers to them.
+If you'd like to override this behavior, just specify CELERYD_QUEUES in your pecan config file(s):
+
+  # Celery Configuration
+  celery = {
+    'BROKER_HOST'                           : 'localhost',
+    'BROKER_PORT'                           : 5672,
+    ...
+    'CELERYD_QUEUES'                        : 'math,other',
+  }
 
 Using the development version
 ------------------------------
