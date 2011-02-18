@@ -1,4 +1,3 @@
 include setup.py
-include bin
 include pecancelery/tests/*
 include README.rst

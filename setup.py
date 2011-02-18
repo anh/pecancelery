@@ -36,6 +36,6 @@ setup(
     install_requires        = requirements,
     entry_points            = """
     [paste.paster_command]
-    pecan-celeryd = pecancelery.bin.celeryd:CeleryCommand
+    pecan-celeryd = pecancelery.commands.celeryd:CeleryCommand
     """
 )

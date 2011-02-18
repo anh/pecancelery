@@ -1,6 +1,6 @@
 from pecan                          import configuration
 from pecancelery.app                import base_app
-from pecancelery.bin.celeryd        import CeleryCommand
+from pecancelery.commands.celeryd   import CeleryCommand
 
 import os
 import unittest
