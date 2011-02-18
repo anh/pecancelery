@@ -18,6 +18,7 @@ setup(
     author                  = "Ryan Petrello",
     author_email            = "ryan [at] ryanpetrello [dot] com",
     description             = "Celery integration for pecan",
+    long_description        = open('README.rst').read(),
     classifiers             = [
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
