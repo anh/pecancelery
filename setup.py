@@ -1,4 +1,9 @@
-from setuptools import setup
+try:
+    from setuptools import setup, find_packages
+except ImportError:
+    from ez_setup import use_setuptools
+    use_setuptools()
+    from setuptools import setup, find_packages
 
 #
 # determine requirements
@@ -19,6 +24,7 @@ setup(
     author_email            = "ryan [at] ryanpetrello [dot] com",
     description             = "Celery integration for pecan",
     long_description        = open('README.rst').read(),
+    packages                = find_packages(exclude=['ez_setup', 'tests']),
     classifiers             = [
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
