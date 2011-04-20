@@ -18,12 +18,23 @@ class CeleryCommand(Command):
     min_args = 1
     max_args = 1
     
-    def parse_config(self):
-        self.config = self.load_configuration(self.args[0])
-    
     def command(self): 
-        self.parse_config()
-               
+
+        # load the application
+        self.config = self.load_configuration(self.args[0])
+        setattr(self.config.app, 'reload', False)
+        self.load_app(self.config)
+        
+        locs = dict(__name__='pecan-admin')
+        
+        # find the model for the app
+        model = self.load_model(self.config)
+        if model:
+            locs['model'] = model
+        
+        # insert the pecan locals
+        exec('from pecan import abort, conf, redirect, request, response') in locs
+
         # get daemonize configuration
         # note that it should be under "conf.celery.__daemonize__"
         self.daemonize = self.config.celery.get('__daemonize__', False) is True
