@@ -10,7 +10,7 @@ except ImportError:
 #
 requirements = [
   "pecan",
-  "celery >= 2.2"
+  "celery >= 2.2.5"
 ]
 
 setup(
