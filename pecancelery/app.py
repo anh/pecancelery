@@ -33,6 +33,12 @@ class PecanCeleryApp(app.App):
         """Current configuration (dict and attribute access)."""
         return self._get_config()
 
+    @property
+    def backend(self):
+        """Storing/retreiving task state.  See
+        :class:`~celery.backend.base.BaseBackend`."""
+        return self._get_backend()
+
 class BaseAppFactory(object):
     
     __app__ = None
@@ -62,6 +68,10 @@ class BaseClassFactory(object):
                         if name != 'PecanTask':
                             cls.__subtasks__.append(cls)
                         TaskType.__init__(cls, name, bases, ns)
+
+                @property
+                def backend(self):
+                    return self.app.backend
         
             self.__task__ = PecanTask
             

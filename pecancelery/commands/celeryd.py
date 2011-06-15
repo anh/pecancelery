@@ -59,7 +59,7 @@ class CeleryCommand(Command):
 
         self.log_break()
         self.log('Starting celeryd...')
-        
+
         pecancelery.app.base_app.Worker(queues = self.determine_queues()).run()
 
     def determine_queues(self):
