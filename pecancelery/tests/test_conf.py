@@ -1,7 +1,7 @@
 import os
 import celery
 import unittest
-from pecan import configuration
+from pecan              import configuration
 
 class TestConf(unittest.TestCase):
     
@@ -56,3 +56,17 @@ class TestConf(unittest.TestCase):
         for k, v in app.loader.conf.items():
             if k == 'CELERY_IMPORTS':
                 self.assertEqual(dict(conf)[k], ('package.module.tasks',))
+
+    def test_backend(self):
+        """
+        Ensure that if CELERY_RESULT_BACKEND is specified manually in pecan
+        config, that the broker is properly set at the `app` and `task` level.
+        """     
+        from celery.backends.database   import DatabaseBackend
+        from configs.sampleproj.tasks   import AddTask
+        path = os.path.join(os.path.dirname(__file__), 'configs', 'database_backend.py')
+        configuration.set_config(path)        
+
+        task = AddTask()
+        assert task.app.backend.__class__ == DatabaseBackend
+        assert task.backend.__class__ == DatabaseBackend
